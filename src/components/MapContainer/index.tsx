@@ -18,10 +18,9 @@ type MapContainerProps = IMapProps & {
   markers?: MarkerInfo[];
   initialCenter?: { lat: number; lng: number };
   zoom?: number;
-  onMarkerClick?: any;
-  onMapClick?: any;
-  activeMarker?: any;
-  setActiveMarker?: any;
+  onMarkerClick?: markerEventHandler;
+  onMapClick?: (marker: any) => void;
+  activeMarker?: google.maps.Marker & { title: string };
 };
 
 const MapContainer = ({
@@ -34,10 +33,9 @@ const MapContainer = ({
     lng: -122.335167,
   },
   zoom = 18,
-  onMarkerClick,
+  onMarkerClick = () => null,
   onMapClick,
   activeMarker,
-  setActiveMarker,
 }: MapContainerProps) => {
   const mapStyles = {
     container: {
@@ -68,19 +66,21 @@ const MapContainer = ({
     >
       {markers && getMarkers({ markers, google, onMarkerClick })}
 
-      <InfoWindow
-        google={google}
-        // this is unfortunate -- the types for google-maps-react falsely requires a map prop
-        // to be sent to the InfoWindow even though it is nested within a Map -- it should be
-        // handled like it is in a Marker component, but alas
-        map={map as google.maps.Map}
-        marker={activeMarker}
-        visible={!!activeMarker}
-      >
-        <div>
-          <p>{activeMarker && activeMarker.title}</p>
-        </div>
-      </InfoWindow>
+      {activeMarker && (
+        <InfoWindow
+          google={google}
+          // this is unfortunate -- the types for google-maps-react falsely requires a map prop
+          // to be sent to the InfoWindow even though it is nested within a Map -- it should be
+          // handled like it is in a Marker component, but alas
+          map={map as google.maps.Map}
+          marker={activeMarker}
+          visible={!!activeMarker}
+        >
+          <div>
+            <p>{activeMarker && activeMarker.title}</p>
+          </div>
+        </InfoWindow>
+      )}
     </Map>
   );
 };

@@ -7,26 +7,34 @@ import IWalkData from "../iwalk-data.json";
 export type MarkerInfo = {
   coordinates: google.maps.LatLngLiteral;
   title: string;
-  iconUrl?: any;
+  iconUrl?: string;
   slug: string;
 };
 
 const mapWidth = "40vw";
 
-const iconUrl =
-  "http://cdn.shopify.com/s/files/1/1061/1924/products/Lemon_Emoji_grande.png?v=1571606034";
+const styles = {
+  wrapper: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row" as any,
+  },
+  mapWrapper: {
+    width: mapWidth,
+  },
+  listWrapper: {
+    maxWidth: "40vw",
+  },
+};
+
+const markers: MarkerInfo[] = IWalkData.walk.stops.map((stop: any) => ({
+  coordinates: { lat: stop.lat, lng: stop.lng },
+  title: stop.name.en,
+  slug: stop.slug,
+}));
 
 const IWalkMapAndStreetView = (props: any) => {
   const [activeMarker, setActiveMarker] = React.useState<any>(null);
-  const markers: MarkerInfo[] = IWalkData.walk.stops.map((stop: any) => ({
-    coordinates: { lat: stop.lat, lng: stop.lng },
-    title: stop.name.en,
-    iconUrl,
-    slug: stop.slug,
-  }));
-
-  console.log(IWalkData);
-
   const initialCenter = markers[0].coordinates;
 
   const markersListItems = markers.map((marker, idx) => (
@@ -46,15 +54,11 @@ const IWalkMapAndStreetView = (props: any) => {
   ));
 
   const onMarkerClick: markerEventHandler = (_, clickedMarker, __) => {
-    console.log("opening info window for:", clickedMarker);
-
     setActiveMarker(clickedMarker);
   };
 
   const onMapClick = (marker: any) => {
     if (activeMarker === null) return;
-
-    console.log("closing info window!");
     setActiveMarker(null);
   };
 
@@ -73,7 +77,6 @@ const IWalkMapAndStreetView = (props: any) => {
             onMarkerClick={onMarkerClick}
             onMapClick={onMapClick}
             activeMarker={activeMarker}
-            setActiveMarker={setActiveMarker}
           />
         </div>
         <div style={styles.listWrapper}>
@@ -92,20 +95,6 @@ const IWalkMapAndStreetView = (props: any) => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  wrapper: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row" as any,
-  },
-  mapWrapper: {
-    width: mapWidth,
-  },
-  listWrapper: {
-    maxWidth: "40vw",
-  },
 };
 
 export default IWalkMapAndStreetView;

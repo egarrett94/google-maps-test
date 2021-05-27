@@ -1,6 +1,8 @@
 import { GoogleAPI, Marker, markerEventHandler } from "google-maps-react";
-import React from "react";
 import { MarkerInfo } from "../../pages/MarkersMap";
+
+const defaultUrl =
+  "http://cdn.shopify.com/s/files/1/1061/1924/products/Lemon_Emoji_grande.png?v=1571606034";
 
 const Markers = (props: {
   markers: MarkerInfo[];
@@ -20,7 +22,7 @@ const Markers = (props: {
         lng: marker.coordinates.lng,
       }}
       icon={{
-        url: marker.iconUrl,
+        url: marker.iconUrl ? marker.iconUrl : defaultUrl,
         anchor: new google.maps.Point(32, 32),
         scaledSize: new google.maps.Size(32, 32),
       }}

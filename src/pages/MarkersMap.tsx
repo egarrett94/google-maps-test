@@ -3,13 +3,10 @@ import MapContainer from "../components/MapContainer";
 export type MarkerInfo = {
   coordinates: google.maps.LatLngLiteral;
   title: string;
-  iconUrl?: any;
+  iconUrl?: string;
 };
 
 const mapWidth = "60vw";
-
-const iconUrl =
-  "http://cdn.shopify.com/s/files/1/1061/1924/products/Lemon_Emoji_grande.png?v=1571606034";
 
 const MarkersMap = () => {
   const markers: MarkerInfo[] = [
@@ -19,7 +16,6 @@ const MarkersMap = () => {
         lat: 47.608013,
       },
       title: "marker 1",
-      iconUrl,
     },
     {
       coordinates: {
@@ -27,7 +23,6 @@ const MarkersMap = () => {
         lat: 47.606013,
       },
       title: "marker 2",
-      iconUrl,
     },
   ];
 
