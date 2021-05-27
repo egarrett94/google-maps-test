@@ -24,17 +24,17 @@ const IWalkMap = () => {
   const initialCenter = markers[0].coordinates;
 
   const markersListItems = markers.map((marker, idx) => (
-    <li key={idx}>
+    <li key={idx} style={{ padding: "0.5rem" }}>
       <strong>{marker.title}</strong> → {marker.coordinates.lat},{" "}
       {marker.coordinates.lng}
     </li>
   ));
 
   return (
-    <>
-      <h1>
+    <div className="container">
+      <h2>
         This is a map with IWalk location markers using google-maps-react.
-      </h1>
+      </h2>
       <div style={styles.wrapper}>
         <div style={styles.mapWrapper}>
           <MapContainer
@@ -47,7 +47,7 @@ const IWalkMap = () => {
           <ul>{markersListItems}</ul>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

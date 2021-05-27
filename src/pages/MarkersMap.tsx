@@ -32,15 +32,15 @@ const MarkersMap = () => {
   ];
 
   const markersListItems = markers.map((marker, idx) => (
-    <li key={idx}>
+    <li key={idx} style={{ padding: "0.5rem" }}>
       <strong>{marker.title}</strong> → {marker.coordinates.lat},{" "}
       {marker.coordinates.lng}
     </li>
   ));
 
   return (
-    <>
-      <h1>This is a map with markers using google-maps-react.</h1>
+    <div className="container">
+      <h2>This is a map with markers using google-maps-react.</h2>
       <div style={styles.wrapper}>
         <div style={styles.mapWrapper}>
           <MapContainer width={mapWidth} markers={markers} />
@@ -49,7 +49,7 @@ const MarkersMap = () => {
           <ul>{markersListItems}</ul>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

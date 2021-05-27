@@ -33,6 +33,7 @@ const IWalkMapAndStreetView = (props: any) => {
     <li
       key={idx}
       style={{
+        padding: "0.5rem",
         color:
           activeMarker && activeMarker.title === marker.title
             ? "tomato"
@@ -58,11 +59,11 @@ const IWalkMapAndStreetView = (props: any) => {
   };
 
   return (
-    <>
-      <h1>
+    <div className="container">
+      <h2>
         This is a map and street view with IWalk location markers using
         google-maps-react + the streetview API.
-      </h1>
+      </h2>
       <div style={styles.wrapper}>
         <div style={styles.mapWrapper}>
           <MapContainer
@@ -89,7 +90,7 @@ const IWalkMapAndStreetView = (props: any) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -97,7 +98,7 @@ const styles = {
   wrapper: {
     width: "100%",
     display: "flex",
-    "flex-direction": "row",
+    flexDirection: "row" as any,
   },
   mapWrapper: {
     width: mapWidth,

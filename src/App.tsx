@@ -7,9 +7,9 @@ import IWalkMapAndStreetView from "./pages/IWalkMapAndStreetView";
 import {
   Redirect,
   Switch,
-  Link,
   Route,
   BrowserRouter as Router,
+  NavLink,
 } from "react-router-dom";
 
 const routes = [
@@ -37,11 +37,11 @@ const routes = [
 
 const App = () => (
   <Router>
-    <ul>
+    <ul className="nav">
       {routes.map((route) => (
-        <Link key={route.path} to={route.path}>
+        <NavLink key={route.path} to={route.path} activeClassName="active">
           <li>{route.name}</li>
-        </Link>
+        </NavLink>
       ))}
     </ul>
     <Switch>

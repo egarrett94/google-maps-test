@@ -12,9 +12,31 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #151722;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.container {
+  padding: 2rem;
+}
+
+.nav {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav a {
+  margin: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  color: tomato;
+}
+
+.nav .active {
+  color: rgb(229, 116, 96);
+  border-bottom: 1px solid tomato;
 }
